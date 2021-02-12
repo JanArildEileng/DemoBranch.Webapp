@@ -1,3 +1,4 @@
+using DemoBranch.Webapp.Infra.DataAksess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.InMemory;
+using Microsoft.EntityFrameworkCore;
 
 namespace DemoBranch.Webapp
 {
@@ -32,6 +35,11 @@ namespace DemoBranch.Webapp
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DemoBranch.Webapp", Version = "v1" });
             });
+
+            services.AddDbContext<DemoEventContext>(options =>
+              options.UseInMemoryDatabase("Test"));
+
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
