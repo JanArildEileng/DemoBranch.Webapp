@@ -1,5 +1,5 @@
-﻿using DemoBranch.Webapp.Core.Entities;
-using DemoBranch.Webapp.Infra.DataAksess;
+﻿using DemoBranch.Webapp.Domain.Entities;
+using DemoBranch.Webapp.Persistence.DataAksess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;

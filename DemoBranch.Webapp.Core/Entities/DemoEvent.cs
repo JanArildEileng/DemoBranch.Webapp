@@ -1,7 +1,7 @@
-﻿using DemoBranch.Webapp.Core.Common;
+﻿using DemoBranch.Webapp.Domain.Common;
 using System;
 
-namespace DemoBranch.Webapp.Core.Entities
+namespace DemoBranch.Webapp.Domain.Entities
 
 {
     public class DemoEvent: EntityBase

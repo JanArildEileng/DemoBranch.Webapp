@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DemoBranch.Webapp.Core\DemoBranch.Webapp.Core.csproj" />
+    <ProjectReference Include="..\DemoBranch.Webapp.Core\DemoBranch.Webapp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

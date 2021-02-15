@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DemoBranch.Webapp.Core.Common
+namespace DemoBranch.Webapp.Domain.Common
 {
     public class EntityBase
     {

@@ -1,4 +1,4 @@
-﻿using DemoBranch.Webapp.Core.Entities;
+﻿using DemoBranch.Webapp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DemoBranch.Webapp.Infra.DataAksess
+namespace DemoBranch.Webapp.Persistence.DataAksess
 {
     public class DemoEventContext:DbContext
     {
