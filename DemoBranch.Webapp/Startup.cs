@@ -1,19 +1,12 @@
-using DemoBranch.Webapp.Infra.DataAksess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.InMemory;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Channels;
+using DemoBranch.Webapp.Domain.Entities;
+using DemoBranch.Webapp.Appliction;
 
 namespace DemoBranch.Webapp
 {
@@ -36,10 +29,10 @@ namespace DemoBranch.Webapp
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DemoBranch.Webapp", Version = "v1" });
             });
 
-            services.AddDbContext<DemoEventContext>(options =>
-              options.UseInMemoryDatabase("Test"));
-
-          
+            //create a channel    
+          //  services.AddSingleton(Channel.CreateUnbounded<ChannelData>());
+            services.AddSingleton(new MyChannel1());
+            services.AddHostedService<ChannelBackgroundService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

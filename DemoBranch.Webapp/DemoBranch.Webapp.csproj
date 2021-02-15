@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -13,8 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DemoBranch.Webapp.Core\DemoBranch.Webapp.Core.csproj" />
-    <ProjectReference Include="..\DemoBranch.Webapp.Infra\DemoBranch.Webapp.Infra.csproj" />
+    <ProjectReference Include="..\DemoBranch.Webapp.Appliction\DemoBranch.Webapp.Appliction.csproj" />
+    <ProjectReference Include="..\DemoBranch.Webapp.Core\DemoBranch.Webapp.Domain.csproj" />
+    <ProjectReference Include="..\DemoBranch.Webapp.Infra\DemoBranch.Webapp.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
