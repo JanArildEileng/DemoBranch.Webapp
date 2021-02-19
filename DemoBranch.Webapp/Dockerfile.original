@@ -8,8 +8,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["DemoBranch.Webapp/DemoBranch.Webapp.csproj", "DemoBranch.Webapp/"]
-COPY ["DemoBranch.Webapp.Infra/DemoBranch.Webapp.Persistence.csproj", "DemoBranch.Webapp.Infra/"]
-COPY ["DemoBranch.Webapp.Core/DemoBranch.Webapp.Domain.csproj", "DemoBranch.Webapp.Core/"]
 RUN dotnet restore "DemoBranch.Webapp/DemoBranch.Webapp.csproj"
 COPY . .
 WORKDIR "/src/DemoBranch.Webapp"
