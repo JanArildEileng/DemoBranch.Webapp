@@ -35,9 +35,9 @@ namespace DemoBranch.Webapp.Controllers
             var personListe = new List<Person>();
 
 
-            foreach(var id in uniqPersonId)
+            foreach(var aggregateId in uniqPersonId)
             {
-                var events = demoEventContext.DemoEvent.Where(e => e.AggregateId == id).OrderBy(e => e.Timestamp);
+                var events = demoEventContext.DemoEvent.Where(e => e.AggregateId == aggregateId).OrderBy(e => e.Timestamp);
                 Person person = null;
                 foreach (var demoevent in events)
                 {
@@ -46,15 +46,15 @@ namespace DemoBranch.Webapp.Controllers
                     {
                         case EventTypes.CreateEvent:
                             {
-                                person = new Person();
-                                var details = JsonConvert.DeserializeObject<CreateEvent>(demoevent.EventDetails);
+                                person = new Person() { Id = aggregateId };
+                                var details = JsonConvert.DeserializeObject<CreatePerson>(demoevent.EventDetails);
                                 person.Name = details.Name;
                             }
                             break;
 
                         case EventTypes.ChangeEvent:
                             {
-                                var details = JsonConvert.DeserializeObject<ChangeEvent>(demoevent.EventDetails);
+                                var details = JsonConvert.DeserializeObject<ChangePerson>(demoevent.EventDetails);
                                 person.Name = details.Name;
 
                             }
@@ -75,8 +75,8 @@ namespace DemoBranch.Webapp.Controllers
         }
 
 
-        [HttpPost("CreateEvent")]
-        public ActionResult<DemoEvent> PostCreateEvent([FromBody] CreateEvent CreateEvent)
+        [HttpPost("CreatePerson")]
+        public ActionResult<DemoEvent> CreatePerson([FromBody] CreatePerson CreateEvent)
         {
 
             DemoEvent demoEvent = new DemoEvent(EventTypes.CreateEvent)
@@ -90,8 +90,8 @@ namespace DemoBranch.Webapp.Controllers
         }
 
 
-        [HttpPatch("ChangeEvent/{AggregateId:Guid}")]
-        public ActionResult<DemoEvent> PatchChangeEvent(Guid AggregateId, [FromBody] ChangeEvent ChangeEvent)
+        [HttpPatch("ChangePerson/{AggregateId:Guid}")]
+        public ActionResult<DemoEvent> ChangePerson(Guid AggregateId, [FromBody] ChangePerson ChangeEvent)
         {
 
             DemoEvent demoEvent = new DemoEvent(EventTypes.ChangeEvent, AggregateId)

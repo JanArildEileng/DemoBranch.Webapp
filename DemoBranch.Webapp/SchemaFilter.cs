@@ -10,7 +10,7 @@ namespace DemoBranch.Webapp
     {
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
-            if (context.Type == typeof(CreateEvent))
+            if (context.Type == typeof(CreatePerson))
             {
                 schema.Example = new OpenApiObject
                 {
@@ -25,7 +25,7 @@ namespace DemoBranch.Webapp
     {
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
-            if (context.Type == typeof(ChangeEvent))
+            if (context.Type == typeof(ChangePerson))
             {
                 schema.Example = new OpenApiObject
                 {

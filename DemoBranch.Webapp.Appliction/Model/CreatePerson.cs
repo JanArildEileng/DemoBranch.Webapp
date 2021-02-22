@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DemoBranch.Webapp.Appliction.Model
 {
-    public class CreateEvent
+    public class CreatePerson
     {
         public string Name { get; set; }
     }
