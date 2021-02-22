@@ -1,4 +1,6 @@
 ﻿using DemoBranch.Webapp.Appliction.Model;
+using DemoBranch.Webapp.Appliction.Person.Change;
+using DemoBranch.Webapp.Appliction.Person.Create;
 using DemoBranch.Webapp.Domain.Entities;
 using DemoBranch.Webapp.Domain.Enums;
 using DemoBranch.Webapp.Persistence.DataAksess;
@@ -44,7 +46,7 @@ namespace DemoBranch.Webapp.Controllers
                    
                     switch(demoevent.EventType)
                     {
-                        case EventTypes.CreateEvent:
+                        case EventTypes.CreatePersonEvent:
                             {
                                 person = new Person() { Id = aggregateId };
                                 var details = JsonConvert.DeserializeObject<CreatePerson>(demoevent.EventDetails);
@@ -52,7 +54,7 @@ namespace DemoBranch.Webapp.Controllers
                             }
                             break;
 
-                        case EventTypes.ChangeEvent:
+                        case EventTypes.ChangePersonEvent:
                             {
                                 var details = JsonConvert.DeserializeObject<ChangePerson>(demoevent.EventDetails);
                                 person.Name = details.Name;
@@ -76,31 +78,19 @@ namespace DemoBranch.Webapp.Controllers
 
 
         [HttpPost("CreatePerson")]
-        public ActionResult<DemoEvent> CreatePerson([FromBody] CreatePerson CreateEvent)
+        public ActionResult<DemoEvent> CreatePerson([FromBody] CreatePerson createEvent ,[FromServices] CreatePersonHandler createPersonHandler)
         {
 
-            DemoEvent demoEvent = new DemoEvent(EventTypes.CreateEvent)
-            {
-                EventDetails = JsonConvert.SerializeObject(CreateEvent)
-            };
-
-            demoEventContext.DemoEvent.Add(demoEvent);
-            demoEventContext.SaveChanges();
+            DemoEvent demoEvent = createPersonHandler.CreatePerson(createEvent);
             return Created("", demoEvent);
         }
 
 
         [HttpPatch("ChangePerson/{AggregateId:Guid}")]
-        public ActionResult<DemoEvent> ChangePerson(Guid AggregateId, [FromBody] ChangePerson ChangeEvent)
+        public ActionResult<DemoEvent> ChangePerson(Guid AggregateId, [FromBody] ChangePerson ChangeEvent, [FromServices] ChangePersonHandler changePersonHandler)
         {
 
-            DemoEvent demoEvent = new DemoEvent(EventTypes.ChangeEvent, AggregateId)
-            {
-                EventDetails = JsonConvert.SerializeObject(ChangeEvent)
-            };
-
-            demoEventContext.DemoEvent.Add(demoEvent);
-            demoEventContext.SaveChanges();
+            DemoEvent demoEvent = changePersonHandler.ChangePerson(ChangeEvent, AggregateId);
             return Created("", demoEvent);
         }
     }

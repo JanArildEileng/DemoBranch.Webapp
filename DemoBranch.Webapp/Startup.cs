@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.EntityFrameworkCore;
+using DemoBranch.Webapp.Appliction.Person.Create;
+using DemoBranch.Webapp.Appliction.Person.Change;
 
 namespace DemoBranch.Webapp
 {
@@ -43,7 +45,13 @@ namespace DemoBranch.Webapp
             services.AddDbContext<DemoEventContext>(options =>
               options.UseInMemoryDatabase("Test"));
 
-          
+
+            services.AddScoped<CreatePersonHandler>();
+            services.AddScoped<ChangePersonHandler>();
+            
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

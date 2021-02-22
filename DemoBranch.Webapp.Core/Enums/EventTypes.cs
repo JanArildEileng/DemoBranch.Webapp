@@ -8,7 +8,7 @@ namespace DemoBranch.Webapp.Domain.Enums
 {
     public enum EventTypes
     {
-        CreateEvent=1,
-        ChangeEvent=2
+        CreatePersonEvent=1,
+        ChangePersonEvent=2
     }
 }
