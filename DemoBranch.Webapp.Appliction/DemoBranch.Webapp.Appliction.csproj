@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DemoBranch.Webapp.Infra\DemoBranch.Webapp.Persistence.csproj" />
+    <ProjectReference Include="..\DemoBranch.Webapp.Core\DemoBranch.Webapp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

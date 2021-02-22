@@ -16,6 +16,8 @@ using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.EntityFrameworkCore;
 using DemoBranch.Webapp.Appliction.Person.Create;
 using DemoBranch.Webapp.Appliction.Person.Change;
+using DemoBranch.Webapp.Appliction.Contracts;
+using DemoBranch.Webapp.Persistence.DataAksess.Repositories;
 
 namespace DemoBranch.Webapp
 {
@@ -45,6 +47,8 @@ namespace DemoBranch.Webapp
             services.AddDbContext<DemoEventContext>(options =>
               options.UseInMemoryDatabase("Test"));
 
+
+            services.AddScoped<IDemoEventRepository,DemoEventRepository>();
 
             services.AddScoped<CreatePersonHandler>();
             services.AddScoped<ChangePersonHandler>();

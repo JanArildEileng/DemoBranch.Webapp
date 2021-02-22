@@ -1,7 +1,7 @@
-﻿using DemoBranch.Webapp.Appliction.Model;
+﻿using DemoBranch.Webapp.Appliction.Contracts;
+using DemoBranch.Webapp.Appliction.Model;
 using DemoBranch.Webapp.Domain.Entities;
 using DemoBranch.Webapp.Domain.Enums;
-using DemoBranch.Webapp.Persistence.DataAksess;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,24 +11,23 @@ namespace DemoBranch.Webapp.Appliction.Person.Create
 {
     public class CreatePersonHandler
     {
-        private readonly DemoEventContext demoEventContext;
+        private readonly IDemoEventRepository demoEventRepository;
 
-        public CreatePersonHandler(DemoEventContext DemoEventContext)
+        public CreatePersonHandler(IDemoEventRepository demoEventRepository)
         {
-            demoEventContext = DemoEventContext;
+            this.demoEventRepository = demoEventRepository;
         }
 
-            public DemoEvent CreatePerson(CreatePerson createPerson)
+            public DemoEvent CreatePerson(CreatePerson CreateEvent)
             {
 
                 DemoEvent demoEvent = new DemoEvent(EventTypes.CreatePersonEvent)
                 {
-                    EventDetails = JsonConvert.SerializeObject(createPerson)
+                    EventDetails = JsonConvert.SerializeObject(CreateEvent)
                 };
 
-                demoEventContext.DemoEvent.Add(demoEvent);
-                demoEventContext.SaveChanges();
-                return demoEvent;
+            
+                return demoEventRepository.AddEvent(demoEvent);
             }
 
     }

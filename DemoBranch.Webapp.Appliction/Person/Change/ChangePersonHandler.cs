@@ -1,7 +1,7 @@
-﻿using DemoBranch.Webapp.Appliction.Model;
+﻿using DemoBranch.Webapp.Appliction.Contracts;
+using DemoBranch.Webapp.Appliction.Model;
 using DemoBranch.Webapp.Domain.Entities;
 using DemoBranch.Webapp.Domain.Enums;
-using DemoBranch.Webapp.Persistence.DataAksess;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,11 +13,11 @@ namespace DemoBranch.Webapp.Appliction.Person.Change
 {
     public class ChangePersonHandler
     {
-        private readonly DemoEventContext demoEventContext;
+        private readonly IDemoEventRepository demoEventRepository;
 
-        public ChangePersonHandler(DemoEventContext DemoEventContext)
+        public ChangePersonHandler(IDemoEventRepository demoEventRepository)
         {
-            demoEventContext = DemoEventContext;
+            this.demoEventRepository = demoEventRepository;
         }
 
         public DemoEvent ChangePerson(ChangePerson changePerson, Guid AggregateId)
@@ -27,10 +27,7 @@ namespace DemoBranch.Webapp.Appliction.Person.Change
             {
                 EventDetails = JsonConvert.SerializeObject(changePerson)
             };
-
-            demoEventContext.DemoEvent.Add(demoEvent);
-            demoEventContext.SaveChanges();
-            return demoEvent;
+            return demoEventRepository.AddEvent(demoEvent);
         }
 
     }
