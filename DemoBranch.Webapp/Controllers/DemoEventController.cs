@@ -1,7 +1,10 @@
-﻿using DemoBranch.Webapp.Domain.Entities;
+﻿using DemoBranch.Webapp.Appliction.Model;
+using DemoBranch.Webapp.Domain.Entities;
+using DemoBranch.Webapp.Domain.Enums;
 using DemoBranch.Webapp.Persistence.DataAksess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,24 +28,17 @@ namespace DemoBranch.Webapp.Controllers
 
         }
 
-        [HttpGet]
-        public IEnumerable<DemoEvent> Get()
+        [HttpGet("GetAll")]
+        public IEnumerable<DemoEvent> GetAll()
         {
 
             return demoEventContext.DemoEvent.ToList();
         }
 
 
-        [HttpPost]
-        public ActionResult<DemoEvent> Post([FromBody] DemoEvent demoEvent)
-        {
-            demoEvent.Id = Guid.NewGuid();
-            demoEvent.EventType = "Post";
-            demoEvent.DateTime =DateTime.Now;
-            demoEventContext.DemoEvent.Add(demoEvent);
-            demoEventContext.SaveChanges();
+      
 
-            return Created("",demoEvent);
-        }
+
+
     }
 }

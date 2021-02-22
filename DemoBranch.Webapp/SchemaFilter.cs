@@ -1,0 +1,39 @@
+﻿using DemoBranch.Webapp.Appliction.Model;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
+
+namespace DemoBranch.Webapp
+{
+    
+    public class CreateEventExamples : ISchemaFilter
+    {
+        public void Apply(OpenApiSchema schema, SchemaFilterContext context)
+        {
+            if (context.Type == typeof(CreateEvent))
+            {
+                schema.Example = new OpenApiObject
+                {
+                    ["name"] = new OpenApiString($"TestName- { new System.Random().Next()}")
+                };
+            }
+        }
+    }
+
+
+    public class ChangeEventExamples : ISchemaFilter
+    {
+        public void Apply(OpenApiSchema schema, SchemaFilterContext context)
+        {
+            if (context.Type == typeof(ChangeEvent))
+            {
+                schema.Example = new OpenApiObject
+                {
+                    ["name"] = new OpenApiString($"ChangedName- { new System.Random().Next()}")
+                };
+            }
+        }
+    }
+
+
+}

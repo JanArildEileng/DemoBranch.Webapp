@@ -1,5 +1,7 @@
 ﻿using DemoBranch.Webapp.Domain.Entities;
+using DemoBranch.Webapp.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,17 +20,20 @@ namespace DemoBranch.Webapp.Persistence.DataAksess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DemoEvent>(
-              e => e.HasKey(demoEvent => demoEvent.Id));
+              e => e.HasKey(demoEvent => demoEvent.EventId));
 
-            modelBuilder.Entity<DemoEvent>().HasData(
-            new List<DemoEvent>()
-             {
-                new DemoEvent() {Id=Guid.NewGuid(), EventType="testEvent",DateTime=DateTime.Now},
-                new DemoEvent() {Id=Guid.NewGuid(), EventType="testEvent2",DateTime=DateTime.Now}
-             }
-             );
-           
-         
+
+
+            //modelBuilder.Entity<DemoEvent>().HasData(
+            //new List<DemoEvent>()
+            // {
+            //    new DemoEvent(EventTypes.CreateEvent) {
+            //        EventDetails=JsonConvert.SerializeObject(new CreateEvent() { })   },
+               
+            // }
+            // );
+
+
         }
 
 

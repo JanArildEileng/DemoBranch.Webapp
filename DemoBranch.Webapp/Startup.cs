@@ -34,6 +34,10 @@ namespace DemoBranch.Webapp
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DemoBranch.Webapp", Version = "v1" });
+                c.SchemaFilter<CreateEventExamples>();
+                c.SchemaFilter<ChangeEventExamples>();
+          
+
             });
 
             services.AddDbContext<DemoEventContext>(options =>
