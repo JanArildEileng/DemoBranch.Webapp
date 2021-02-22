@@ -1,16 +1,14 @@
-﻿using DemoBranch.Webapp.Appliction.Model;
-using DemoBranch.Webapp.Appliction.Person.Change;
-using DemoBranch.Webapp.Appliction.Person.Create;
+﻿using AutoMapper;
+using DemoBranch.Webapp.Appliction.Model;
+using DemoBranch.Webapp.Appliction.Person.Commands.Change;
+using DemoBranch.Webapp.Appliction.Person.Commands.Create;
+using DemoBranch.Webapp.Appliction.Person.Queries;
 using DemoBranch.Webapp.Domain.Entities;
-using DemoBranch.Webapp.Domain.Enums;
 using DemoBranch.Webapp.Persistence.DataAksess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DemoBranch.Webapp.Controllers
 {
@@ -20,78 +18,43 @@ namespace DemoBranch.Webapp.Controllers
     {
         private readonly DemoEventContext demoEventContext;
         private readonly ILogger<PersonController> _logger;
+        private readonly IMapper mapper;
 
-        public PersonController(DemoEventContext DemoEventContext,ILogger<PersonController> logger)
+        public PersonController(DemoEventContext DemoEventContext,ILogger<PersonController> logger, IMapper mapper)
         {
             demoEventContext = DemoEventContext;
             _logger = logger;
-
+            this.mapper = mapper;
             demoEventContext.Database.EnsureCreated();
 
         }
 
-        [HttpGet("GetAll")]
-        public IEnumerable<Person> GetAll()
+        [HttpGet("GetAllPerson")]
+        public IEnumerable<PersonInfo> GetAllPerson([FromServices] GetAllPersonHandler getAllPersonHandler)
         {
-            var uniqPersonId = demoEventContext.DemoEvent.Select(e => e.AggregateId).Distinct();
-            var personListe = new List<Person>();
-
-
-            foreach(var aggregateId in uniqPersonId)
-            {
-                var events = demoEventContext.DemoEvent.Where(e => e.AggregateId == aggregateId).OrderBy(e => e.Timestamp);
-                Person person = null;
-                foreach (var demoevent in events)
-                {
-                   
-                    switch(demoevent.EventType)
-                    {
-                        case EventTypes.CreatePersonEvent:
-                            {
-                                person = new Person() { Id = aggregateId };
-                                var details = JsonConvert.DeserializeObject<CreatePerson>(demoevent.EventDetails);
-                                person.Name = details.Name;
-                            }
-                            break;
-
-                        case EventTypes.ChangePersonEvent:
-                            {
-                                var details = JsonConvert.DeserializeObject<ChangePerson>(demoevent.EventDetails);
-                                person.Name = details.Name;
-
-                            }
-                            break;
-
-                      default:
-                            _logger.LogInformation($"Ukjent eventtype {demoevent.EventType}");
-                            break;
-
-                    }
-
-                }
-                personListe.Add(person);
-        }
-
+            var personListe = getAllPersonHandler.GetAll();
 
             return personListe;
         }
 
 
         [HttpPost("CreatePerson")]
-        public ActionResult<DemoEvent> CreatePerson([FromBody] CreatePerson createEvent ,[FromServices] CreatePersonHandler createPersonHandler)
+        public ActionResult<DemoEventDto> CreatePerson([FromBody] CreatePerson createEvent ,[FromServices] CreatePersonHandler createPersonHandler)
         {
 
-            DemoEvent demoEvent = createPersonHandler.CreatePerson(createEvent);
-            return Created("", demoEvent);
+
+
+
+            DemoEventDto demoEventDto = mapper.Map<DemoEventDto>(createPersonHandler.CreatePerson(createEvent));
+            return Created("", demoEventDto);
         }
 
 
         [HttpPatch("ChangePerson/{AggregateId:Guid}")]
-        public ActionResult<DemoEvent> ChangePerson(Guid AggregateId, [FromBody] ChangePerson ChangeEvent, [FromServices] ChangePersonHandler changePersonHandler)
+        public ActionResult<DemoEventDto> ChangePerson(Guid AggregateId, [FromBody] ChangePerson ChangeEvent, [FromServices] ChangePersonHandler changePersonHandler)
         {
-
-            DemoEvent demoEvent = changePersonHandler.ChangePerson(ChangeEvent, AggregateId);
-            return Created("", demoEvent);
+            DemoEventDto demoEventDto = mapper.Map<DemoEventDto>(changePersonHandler.ChangePerson(ChangeEvent, AggregateId));
+            return Accepted("", demoEventDto);
         }
     }
 }

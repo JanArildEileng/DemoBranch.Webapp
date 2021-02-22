@@ -1,13 +1,9 @@
 ﻿using DemoBranch.Webapp.Appliction.Contracts;
-using DemoBranch.Webapp.Appliction.Model;
 using DemoBranch.Webapp.Domain.Entities;
 using DemoBranch.Webapp.Domain.Enums;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DemoBranch.Webapp.Appliction.Person.Create
+namespace DemoBranch.Webapp.Appliction.Person.Commands.Create
 {
     public class CreatePersonHandler
     {

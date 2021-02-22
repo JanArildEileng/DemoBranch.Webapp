@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DemoBranch.Webapp.Appliction.Model
+namespace DemoBranch.Webapp.Appliction.Person.Commands.Create
 {
-    public class Person
+    public class CreatePerson
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
-
     }
 }

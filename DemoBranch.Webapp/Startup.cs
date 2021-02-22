@@ -1,23 +1,18 @@
 using DemoBranch.Webapp.Persistence.DataAksess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.EntityFrameworkCore;
-using DemoBranch.Webapp.Appliction.Person.Create;
-using DemoBranch.Webapp.Appliction.Person.Change;
 using DemoBranch.Webapp.Appliction.Contracts;
 using DemoBranch.Webapp.Persistence.DataAksess.Repositories;
+using DemoBranch.Webapp.Appliction.Person.Commands.Create;
+using DemoBranch.Webapp.Appliction.Person.Commands.Change;
+using DemoBranch.Webapp.Appliction.Person.Queries;
+using AutoMapper;
+using DemoBranch.Webapp.Appliction.AutoMapperProfile;
 
 namespace DemoBranch.Webapp
 {
@@ -49,11 +44,18 @@ namespace DemoBranch.Webapp
 
 
             services.AddScoped<IDemoEventRepository,DemoEventRepository>();
-
+            services.AddScoped<IDemoEventQuery, DemoEventQuery>();
+       
             services.AddScoped<CreatePersonHandler>();
             services.AddScoped<ChangePersonHandler>();
-            
+            services.AddScoped<GetAllPersonHandler>();
 
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<EventProfile>();
+            });
+            var mapper = new Mapper(mapperConfig);
+            services.AddSingleton<IMapper>(mapper);
 
 
         }

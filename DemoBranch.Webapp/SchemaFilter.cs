@@ -1,11 +1,12 @@
-﻿using DemoBranch.Webapp.Appliction.Model;
+﻿using DemoBranch.Webapp.Appliction.Person.Commands.Change;
+using DemoBranch.Webapp.Appliction.Person.Commands.Create;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace DemoBranch.Webapp
 {
-    
+
     public class CreateEventExamples : ISchemaFilter
     {
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
@@ -14,7 +15,7 @@ namespace DemoBranch.Webapp
             {
                 schema.Example = new OpenApiObject
                 {
-                    ["name"] = new OpenApiString($"TestName- { new System.Random().Next()}")
+                    ["name"] = new OpenApiString($"TestName-{ new System.Random().Next()}")
                 };
             }
         }
@@ -29,7 +30,7 @@ namespace DemoBranch.Webapp
             {
                 schema.Example = new OpenApiObject
                 {
-                    ["name"] = new OpenApiString($"ChangedName- { new System.Random().Next()}")
+                    ["name"] = new OpenApiString($"ChangedName-{ new System.Random().Next()}")
                 };
             }
         }

@@ -1,15 +1,10 @@
 ﻿using DemoBranch.Webapp.Appliction.Contracts;
-using DemoBranch.Webapp.Appliction.Model;
 using DemoBranch.Webapp.Domain.Entities;
 using DemoBranch.Webapp.Domain.Enums;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DemoBranch.Webapp.Appliction.Person.Change
+namespace DemoBranch.Webapp.Appliction.Person.Commands.Change
 {
     public class ChangePersonHandler
     {
