@@ -13,6 +13,7 @@ using DemoBranch.Webapp.Appliction.Person.Commands.Change;
 using DemoBranch.Webapp.Appliction.Person.Queries;
 using AutoMapper;
 using DemoBranch.Webapp.Appliction.AutoMapperProfile;
+using MediatR;
 
 namespace DemoBranch.Webapp
 {
@@ -57,6 +58,7 @@ namespace DemoBranch.Webapp
             var mapper = new Mapper(mapperConfig);
             services.AddSingleton<IMapper>(mapper);
 
+            services.AddMediatR(typeof(CreatePersonHandler).Assembly);
 
         }
 
