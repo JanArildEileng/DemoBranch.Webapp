@@ -57,5 +57,12 @@ namespace DemoBranch.Webapp.Controllers
             var task=  mediator.Send(new ChangePersonCommand() { AggregateId = AggregateId, changePerson = changePerson });
             return Accepted("", mapper.Map<DemoEventDto>(task.Result));
         }
+
+        [HttpDelete("DeletePerson/{AggregateId:Guid}")]
+        public ActionResult<DemoEventDto> DeletePerson(Guid AggregateId, [FromBody] ChangePerson changePerson, [FromServices] ChangePersonHandler changePersonHandler)
+        {
+            var task = mediator.Send(new ChangePersonCommand() { AggregateId = AggregateId, changePerson = changePerson });
+            return Accepted("", mapper.Map<DemoEventDto>(task.Result));
+        }
     }
 }
