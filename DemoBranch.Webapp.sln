@@ -3,19 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBranch.Webapp", "DemoBranch.Webapp\DemoBranch.Webapp.csproj", "{13E235E7-4F7E-47D4-BF10-CDAAA4DD4FBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBranch.Webapp", "DemoBranch.Webapp\DemoBranch.Webapp.csproj", "{13E235E7-4F7E-47D4-BF10-CDAAA4DD4FBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBranch.Webapp.Domain", "DemoBranch.Webapp.Core\DemoBranch.Webapp.Domain.csproj", "{0B27C495-0880-4D8D-B603-2D4062C02993}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBranch.Webapp.Domain", "DemoBranch.Webapp.Core\DemoBranch.Webapp.Domain.csproj", "{0B27C495-0880-4D8D-B603-2D4062C02993}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBranch.Webapp.Persistence", "DemoBranch.Webapp.Infra\DemoBranch.Webapp.Persistence.csproj", "{74396005-6275-42C3-8366-BB736D16189B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBranch.Webapp.Persistence", "DemoBranch.Webapp.Infra\DemoBranch.Webapp.Persistence.csproj", "{74396005-6275-42C3-8366-BB736D16189B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{DC97032A-4923-4F70-B283-4FE480EEFD6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBranch.Webapp.Appliction", "DemoBranch.Webapp.Appliction\DemoBranch.Webapp.Appliction.csproj", "{A303F3AA-880D-4427-AC73-117039ED7EF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBranch.Webapp.Appliction", "DemoBranch.Webapp.Appliction\DemoBranch.Webapp.Appliction.csproj", "{A303F3AA-880D-4427-AC73-117039ED7EF3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{3D134220-A23F-4762-8AC7-0F55B70C8A09}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "intrastructure", "intrastructure", "{F602384C-3CEF-4694-85CC-AEC711281E47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "client", "client", "{F5D457A5-CC16-4BCA-B761-DA12AB17FF1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBranch.Webapp.ConsoleClient", "DemoBranch.Webapp.ConsoleClient\DemoBranch.Webapp.ConsoleClient.csproj", "{A71A30A0-0C97-4511-AD71-79FF05091F9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{A303F3AA-880D-4427-AC73-117039ED7EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A303F3AA-880D-4427-AC73-117039ED7EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A303F3AA-880D-4427-AC73-117039ED7EF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A71A30A0-0C97-4511-AD71-79FF05091F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A71A30A0-0C97-4511-AD71-79FF05091F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A71A30A0-0C97-4511-AD71-79FF05091F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A71A30A0-0C97-4511-AD71-79FF05091F9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{0B27C495-0880-4D8D-B603-2D4062C02993} = {DC97032A-4923-4F70-B283-4FE480EEFD6C}
 		{74396005-6275-42C3-8366-BB736D16189B} = {F602384C-3CEF-4694-85CC-AEC711281E47}
 		{A303F3AA-880D-4427-AC73-117039ED7EF3} = {DC97032A-4923-4F70-B283-4FE480EEFD6C}
+		{A71A30A0-0C97-4511-AD71-79FF05091F9F} = {F5D457A5-CC16-4BCA-B761-DA12AB17FF1F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E06AA41-EE47-4D1F-B86E-BA67D7608CA4}
